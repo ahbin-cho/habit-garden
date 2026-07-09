@@ -14,6 +14,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        <link rel="preload" href="/assets/garden-scene-bg.png" as="image" />
+        <link rel="preload" href="/assets/garden-cat-mascot.png" as="image" />
+        <link rel="preload" href="/assets/garden-cat-read.png" as="image" />
+        <link rel="preload" href="/assets/garden-cat-stretch.png" as="image" />
+        <link rel="preload" href="/assets/garden-cat-seeds.png" as="image" />
+        <link rel="preload" href="/assets/garden-cat-tip.png" as="image" />
+        <link rel="preload" href="/assets/seed-packet-button.png" as="image" />
+        <link rel="preload" href="/assets/plant-stage-seed.png" as="image" />
+        <link rel="preload" href="/assets/plant-stage-sprout.png" as="image" />
+        <link rel="preload" href="/assets/plant-stage-leafy.png" as="image" />
+        <link rel="preload" href="/assets/plant-stage-flower.png" as="image" />
+        <link rel="preload" href="/assets/plant-stage-dry.png" as="image" />
+      </head>
       <body>
         <main>{children}</main>
       </body>

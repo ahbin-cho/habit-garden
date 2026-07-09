@@ -310,7 +310,7 @@ export default function HabitGarden() {
   return (
     <div className="space-y-5">
       <section className="sketch-panel animate-fade-in-up overflow-hidden rounded-[34px] bg-[#fffdf7] shadow-[0_24px_70px_rgba(54,45,30,0.10)]">
-        <div className="bg-[#f1eadc] px-5 py-6 text-center">
+        <div className="bg-[#f1eadc] px-3 py-5 text-center sm:px-5 sm:py-6">
           <MascotScene wateredCount={s.wateredCount} total={s.total} />
           <p className="text-xs font-bold text-[#8b806f]">
             오늘의 정원 · {dateLabel}
@@ -340,7 +340,7 @@ export default function HabitGarden() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 bg-[#faf6ed] px-5 py-4 text-center">
+        <div className="grid grid-cols-3 gap-2 bg-[#faf6ed] px-3 py-3 text-center sm:px-5 sm:py-4">
           <div className="mini-sign px-2 py-3">
             <div className="mx-auto mb-2 h-2 w-8 rounded-full bg-[#7faa68]" />
             <div className="text-[11px] font-black text-gray-700">
@@ -368,7 +368,7 @@ export default function HabitGarden() {
           </div>
         </div>
 
-        <div className="space-y-2.5 p-5">
+        <div className="space-y-2.5 p-3 sm:p-5">
           <h3 className="text-sm font-extrabold text-gray-800">오늘의 화분</h3>
           {s.statuses.map((st) => {
             const meta = STATE_META[st.state];
@@ -431,7 +431,7 @@ export default function HabitGarden() {
           })}
         </div>
       </section>
-      <section className="sketch-panel animate-fade-in-up rounded-[28px] bg-[#fffdf7] p-5 shadow-sm">
+      <section className="sketch-panel animate-fade-in-up rounded-[28px] bg-[#fffdf7] p-3.5 shadow-sm sm:p-5">
         <div className="flex items-center gap-4">
           <img
             src="/assets/garden-cat-tip.png"
@@ -471,7 +471,7 @@ export default function HabitGarden() {
       </section>
 
       {s.prescriptionHabit && s.worst && !s.worst.wateredToday && (
-        <section className="sketch-panel animate-fade-in-up rounded-[28px] bg-[#fffdf7] p-5 shadow-sm">
+        <section className="sketch-panel animate-fade-in-up rounded-[28px] bg-[#fffdf7] p-3.5 shadow-sm sm:p-5">
           <div className="flex gap-4">
             <img
               src="/assets/garden-cat-tip.png"
@@ -494,7 +494,7 @@ export default function HabitGarden() {
         </section>
       )}
 
-      <section className="sketch-panel animate-fade-in-up rounded-[28px] bg-[#fffdf7] p-5 shadow-sm">
+      <section className="sketch-panel animate-fade-in-up rounded-[28px] bg-[#fffdf7] p-3.5 shadow-sm sm:p-5">
         <div className="mb-3 flex items-center justify-between">
           <h3 className="text-sm font-extrabold text-gray-800">
             21일 정원 기록
@@ -601,7 +601,7 @@ function Onboarding({
   const ready = selected.length >= 3;
 
   return (
-    <div className="sketch-panel animate-fade-in-up space-y-6 rounded-[32px] bg-[#fffdf7] p-6 shadow-[0_24px_70px_rgba(54,45,30,0.10)] sm:p-8">
+    <div className="sketch-panel animate-fade-in-up space-y-6 rounded-[32px] bg-[#fffdf7] p-4 shadow-[0_24px_70px_rgba(54,45,30,0.10)] sm:p-8">
       <div className="text-center">
         <img
           src="/assets/garden-cat-seeds.png"
@@ -623,7 +623,7 @@ function Onboarding({
             <button
               key={h.key}
               onClick={() => toggle(h.key)}
-              className={`seed-packet min-h-[132px] px-4 py-4 text-sm font-black transition ${PACKET_TILTS[idx % PACKET_TILTS.length]} ${
+              className={`seed-packet min-h-[132px] px-4 py-4 text-sm font-black transition-transform ${PACKET_TILTS[idx % PACKET_TILTS.length]} ${
                 on ? "seed-packet--on text-[#26352a]" : "text-gray-700"
               }`}
             >
@@ -739,7 +739,7 @@ function Onboarding({
               <button
                 key={i.key}
                 onClick={() => setIdentity(i.key)}
-                className={`identity-card min-h-[112px] px-4 py-4 text-left transition ${PACKET_TILTS[idx % PACKET_TILTS.length]} ${
+                className={`identity-card min-h-[112px] px-4 py-4 text-left transition-transform ${PACKET_TILTS[idx % PACKET_TILTS.length]} ${
                   on ? "identity-card--on text-[#26352a]" : "text-gray-700"
                 }`}
               >

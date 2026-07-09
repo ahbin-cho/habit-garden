@@ -2,7 +2,7 @@ import HabitGarden from "@/components/HabitGarden";
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-[#f7f3ea] px-4 py-6 sm:py-9">
+    <div className="min-h-screen bg-[#f7f3ea] px-2.5 py-4 sm:px-4 sm:py-9">
       <div className="mx-auto max-w-xl">
         <header className="mb-5 text-center">
           <div className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-[#e1d8ca] bg-[#fffdf7] px-3 py-1.5 text-[11px] font-black text-[#7d745f] shadow-sm">
