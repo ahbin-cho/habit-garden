@@ -123,8 +123,8 @@
   "hotPaths": [
     {
       "path": "components/HabitGarden.tsx",
-      "accessCount": 26,
-      "lastAccessed": 1783577065899,
+      "accessCount": 35,
+      "lastAccessed": 1783577772685,
       "type": "file"
     },
     {
@@ -135,9 +135,21 @@
     },
     {
       "path": "app/globals.css",
-      "accessCount": 5,
-      "lastAccessed": 1783576370209,
+      "accessCount": 7,
+      "lastAccessed": 1783577649292,
       "type": "directory"
+    },
+    {
+      "path": "app/layout.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1783577640156,
+      "type": "file"
+    },
+    {
+      "path": "app/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1783577733944,
+      "type": "file"
     }
   ],
   "userDirectives": []

@@ -38,6 +38,16 @@ const PLANT_ASSETS: Record<GrowthPlant, string> = {
   dry: "/assets/plant-stage-dry.png"
 };
 
+const SPIRIT_ASSETS: Record<string, string> = {
+  gardener: "/assets/spirit-gardener.png",
+  sprout: "/assets/spirit-sprout.png",
+  weed: "/assets/spirit-weed.png",
+  pot: "/assets/spirit-pot.png",
+  bee: "/assets/spirit-bee.png",
+  tree: "/assets/spirit-tree.png",
+  can: "/assets/spirit-can.png"
+};
+
 function gridColor(ratio: number): string {
   if (ratio <= 0) return "bg-[#eee7da]";
   if (ratio < 0.34) return "bg-[#dce8bf]";
@@ -419,9 +429,7 @@ export default function HabitGarden() {
                   onClick={() => toggleWater(st.habit.key)}
                   aria-pressed={st.wateredToday}
                   className={`water-button shrink-0 px-4 py-2 text-sm font-bold transition active:scale-95 ${
-                    st.wateredToday
-                      ? "water-button--done text-white"
-                      : "text-[#395d3d]"
+                    st.wateredToday ? "water-button--done" : "text-[#395d3d]"
                   }`}
                 >
                   {st.wateredToday ? "완료" : "물주기"}
@@ -450,21 +458,33 @@ export default function HabitGarden() {
           </div>
         </div>
         {diagnosis && (
-          <div className="mt-4 grid gap-2">
+          <div className="mt-4 grid gap-3">
             {diagnosis.spirits.slice(0, 3).map((sp) => (
               <div
                 key={sp.spirit.key}
-                className="rounded-2xl border border-[#e5dccd] bg-[#fffaf0] px-4 py-3 text-sm"
+                className="spirit-card flex items-center gap-3 px-4 py-3 text-sm"
               >
-                <b className="text-[#314235]">{sp.spirit.name}</b>
-                <span className="ml-2 text-gray-500">{sp.reason}</span>
+                <img
+                  src={SPIRIT_ASSETS[sp.spirit.key]}
+                  alt=""
+                  className="h-16 w-16 shrink-0 object-contain drop-shadow-[0_8px_10px_rgba(54,45,30,0.12)]"
+                />
+                <div className="min-w-0">
+                  <b className="block text-[#314235]">{sp.spirit.name}</b>
+                  <span className="mt-0.5 block text-xs font-bold leading-relaxed text-gray-500">
+                    {sp.reason}
+                  </span>
+                  <span className="mt-1 block text-[11px] font-black text-[#8b806f]">
+                    {sp.spirit.role}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
         )}
         <button
           onClick={() => setDiagnosing(true)}
-          className="start-button start-button--ready mt-4 w-full rounded-2xl px-6 py-4 text-base font-bold text-white transition active:scale-[0.99]"
+          className="start-button start-button--ready mt-4 w-full px-6 py-4 text-base font-bold transition active:scale-[0.99]"
         >
           {diagnosis ? "오늘 스캔 다시하기" : "오늘 정원 스캔하기"}
         </button>
@@ -643,34 +663,36 @@ function Onboarding({
           직접 만든 습관
         </h3>
         {customs.length > 0 && (
-          <div className="mt-2 space-y-2">
+          <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
             {customs.map((c) => {
               const on = selected.includes(c.key);
               return (
                 <div
                   key={c.key}
-                  className={`flex items-center gap-3 rounded-2xl border px-4 py-3 transition ${
+                  className={`seed-packet custom-seed-packet min-h-[132px] px-4 py-4 transition ${
                     on
-                      ? "border-[#bfd8b6] bg-[#f6fbef]"
-                      : "border-[#e8dece] bg-white"
+                      ? "seed-packet--on text-[#26352a]"
+                      : "text-gray-700"
                   }`}
                 >
                   <button
                     onClick={() => toggle(c.key)}
-                    className="min-w-0 flex-1 text-left"
+                    className="relative z-10 flex h-full min-w-0 flex-1 flex-col justify-center text-center"
                   >
-                    <span className="block text-sm font-bold text-gray-800">
+                    {on && <span className="seed-packet__badge">심음</span>}
+                    <span className="block pt-7 text-sm font-black">
                       {c.label}
                     </span>
-                    <span className="block text-[11px] text-gray-400">
-                      {c.anchor} · {c.tiny}
+                    <span className="mt-1 line-clamp-2 block text-[10px] font-black leading-snug text-[#9a8d75]">
+                      custom seed
                     </span>
                   </button>
                   <button
                     onClick={() => removeCustom(c.key)}
-                    className="shrink-0 text-xs font-bold text-gray-400 hover:text-rose-500"
+                    className="custom-seed-packet__delete"
+                    aria-label={`${c.label} 삭제`}
                   >
-                    삭제
+                    ×
                   </button>
                 </div>
               );
@@ -679,36 +701,47 @@ function Onboarding({
         )}
 
         {showCustomForm ? (
-          <div className="mt-3 space-y-2 rounded-2xl border border-[#e2d3b8] bg-[#fffaf0] p-4">
+          <div className="custom-form mt-3 space-y-3 p-4">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-[11px] font-black text-[#9a8d75]">
+                  blank seed packet
+                </p>
+                <h4 className="text-sm font-black text-[#26352a]">
+                  새 습관 씨앗 적기
+                </h4>
+              </div>
+              <span className="custom-form__pencil">✎</span>
+            </div>
             <input
               value={customLabel}
               onChange={(e) => setCustomLabel(e.target.value)}
               placeholder="습관 이름 (예: 명상)"
-              className="w-full rounded-xl border border-[#e2d3b8] bg-white px-3 py-2.5 text-sm font-bold text-gray-800 outline-none placeholder:text-gray-400 focus:border-[#5f8f64]"
+              className="custom-input"
             />
             <input
               value={customAnchor}
               onChange={(e) => setCustomAnchor(e.target.value)}
               placeholder="언제 할지 (예: 아침에 일어난 직후)"
-              className="w-full rounded-xl border border-[#e2d3b8] bg-white px-3 py-2.5 text-sm font-bold text-gray-800 outline-none placeholder:text-gray-400 focus:border-[#5f8f64]"
+              className="custom-input"
             />
             <input
               value={customTiny}
               onChange={(e) => setCustomTiny(e.target.value)}
               placeholder="최소 실천 (예: 딱 1분만)"
-              className="w-full rounded-xl border border-[#e2d3b8] bg-white px-3 py-2.5 text-sm font-bold text-gray-800 outline-none placeholder:text-gray-400 focus:border-[#5f8f64]"
+              className="custom-input"
             />
             <div className="flex gap-2">
               <button
                 onClick={() => setShowCustomForm(false)}
-                className="rounded-xl px-4 py-2.5 text-sm font-bold text-gray-500 transition hover:bg-gray-100"
+                className="secondary-button px-4 py-2.5 text-sm font-bold text-gray-500 transition"
               >
                 취소
               </button>
               <button
                 onClick={addCustom}
                 disabled={!customLabel.trim()}
-                className="flex-1 rounded-xl bg-[#5f8f64] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#548a59] disabled:opacity-40"
+                className="custom-add-button flex-1 px-4 py-2.5 text-sm font-black transition disabled:opacity-40"
               >
                 추가하기
               </button>
@@ -718,9 +751,13 @@ function Onboarding({
           <button
             onClick={() => setShowCustomForm(true)}
             disabled={selected.length >= 5}
-            className="mt-3 w-full rounded-2xl border-2 border-dashed border-[#d9d0bf] px-4 py-3 text-sm font-bold text-[#8b806f] transition hover:border-[#5f8f64] hover:text-[#5f8f64] disabled:opacity-40"
+            className="custom-create-packet mt-3 min-h-[116px] w-full px-4 py-4 text-sm font-black transition disabled:opacity-40"
           >
-            + 직접 만들기
+            <span className="custom-create-packet__icon">✎</span>
+            <span className="relative z-10 block">직접 만들기</span>
+            <span className="relative z-10 mt-1 block text-[10px] font-black text-[#9a8d75]">
+              blank seed packet
+            </span>
           </button>
         )}
       </div>
@@ -772,7 +809,7 @@ function Onboarding({
         <button
           disabled={!ready}
           onClick={() => onDone(selected, identity, customs)}
-          className={`start-button flex-1 rounded-2xl px-6 py-4 text-base font-bold text-white transition ${
+          className={`start-button flex-1 px-6 py-4 text-base font-bold transition ${
             ready
               ? "start-button--ready active:scale-[0.99]"
               : "cursor-not-allowed opacity-50"
