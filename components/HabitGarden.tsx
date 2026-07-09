@@ -315,7 +315,9 @@ export default function HabitGarden() {
   });
   const thirsty = s.statuses.filter((st) => !st.wateredToday).length;
   const todaysDiagnosis = state.diagnoses?.[todayK];
-  const diagnosis = todaysDiagnosis ? buildDiagnosis(todaysDiagnosis, dailyQuestions) : null;
+  const diagnosis = todaysDiagnosis
+    ? buildDiagnosis(todaysDiagnosis, dailyQuestions)
+    : null;
 
   return (
     <div className="space-y-5">
@@ -659,9 +661,7 @@ function Onboarding({
 
       {/* 커스텀 습관 영역 */}
       <div>
-        <h3 className="text-sm font-extrabold text-gray-800">
-          직접 만든 습관
-        </h3>
+        <h3 className="text-sm font-extrabold text-gray-800">직접 만든 습관</h3>
         {customs.length > 0 && (
           <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
             {customs.map((c) => {
@@ -670,9 +670,7 @@ function Onboarding({
                 <div
                   key={c.key}
                   className={`seed-packet custom-seed-packet min-h-[132px] px-4 py-4 transition ${
-                    on
-                      ? "seed-packet--on text-[#26352a]"
-                      : "text-gray-700"
+                    on ? "seed-packet--on text-[#26352a]" : "text-gray-700"
                   }`}
                 >
                   <button
@@ -704,9 +702,6 @@ function Onboarding({
           <div className="custom-form mt-3 space-y-3 p-4">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-[11px] font-black text-[#9a8d75]">
-                  blank seed packet
-                </p>
                 <h4 className="text-sm font-black text-[#26352a]">
                   새 습관 씨앗 적기
                 </h4>
@@ -755,9 +750,6 @@ function Onboarding({
           >
             <span className="custom-create-packet__icon">✎</span>
             <span className="relative z-10 block">직접 만들기</span>
-            <span className="relative z-10 mt-1 block text-[10px] font-black text-[#9a8d75]">
-              blank seed packet
-            </span>
           </button>
         )}
       </div>
